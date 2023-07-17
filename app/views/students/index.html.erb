@@ -1,0 +1,23 @@
+
+<ul>
+  <% if user_signed_in? %>
+    <h1>All Users</h1>
+    <h1>Welcome to the Website</h1>
+<p>My id is <%= current_user.id %></p>
+<p>My email is <%= current_user.email %></p>
+    <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+    <ol>
+<% @students.each do |user|  %>
+<li><%= link_to user.name, student_path(user), method: 'get' %></li>
+<%= button_to 'Delete', student_path(user), method: 'delete'%>
+<%= button_to 'Edit', edit_student_path(user), method: 'get'%>
+<%end%>
+</ol>
+
+  <% else %>
+  <h1>Plaese Login into the website First</h1>
+
+    <li><%= link_to 'Sign IN', 'users/sign_in'%></li>
+    <li><%= link_to 'Sign UP', 'users/sign_up' %></li>
+     <% end %>
+</ul>
